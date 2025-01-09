@@ -6,6 +6,10 @@ import Phaser from 'phaser';
         this.currentProblem = null;
         this.score = 0;
         this.difficulty = 'easy';
+        this.timer = 30;
+        this.timerText = null;
+        this.progressBar = null;
+        this.progressWidth = 0;
       }
 
       preload() {
@@ -38,35 +42,47 @@ import Phaser from 'phaser';
 
         // Score display
         this.scoreText = this.add.text(20, 20, 'Score: 0', {
-          fontSize: '32px',
+          fontSize: '18px',
           fill: '#333',
           fontFamily: 'Comic Sans MS'
         });
 
-        // Problem display
-        this.problemText = this.add.text(400, 200, '', {
-          fontSize: '64px',
+        // Timer display
+        this.timerText = this.add.text(this.cameras.main.width - 20, 20, '30', {
+          fontSize: '18px',
           fill: '#333',
           fontFamily: 'Comic Sans MS'
+        }).setOrigin(1, 0);
+
+        // Progress bar
+        this.progressWidth = this.cameras.main.width - 40;
+        this.progressBar = this.add.rectangle(20, this.cameras.main.height - 20, this.progressWidth, 8, 0x00bcd4).setOrigin(0, 1);
+
+        // Problem display
+        this.problemText = this.add.text(this.cameras.main.centerX, this.cameras.main.centerY - 100, '', {
+          fontSize: '36px',
+          fill: '#333',
+          fontFamily: 'Comic Sans MS',
+          align: 'center'
         }).setOrigin(0.5);
 
         // Answer buttons
         this.answerButtons = [];
         const buttonPositions = [
-          { x: 200, y: 400 },
-          { x: 400, y: 400 },
-          { x: 600, y: 400 }
+          { x: this.cameras.main.centerX - 120, y: this.cameras.main.centerY + 100 },
+          { x: this.cameras.main.centerX, y: this.cameras.main.centerY + 100 },
+          { x: this.cameras.main.centerX + 120, y: this.cameras.main.centerY + 100 }
         ];
 
         buttonPositions.forEach((pos, index) => {
-          const button = this.add.circle(pos.x, pos.y, 50, 0x00bcd4)
+          const button = this.add.circle(pos.x, pos.y, 30, 0x00bcd4)
             .setInteractive()
             .on('pointerover', () => this.buttonHover(button))
             .on('pointerout', () => this.buttonOut(button))
             .on('pointerdown', () => this.checkAnswer(index));
           
           const buttonText = this.add.text(pos.x, pos.y, '', {
-            fontSize: '32px',
+            fontSize: '18px',
             fill: '#fff',
             fontFamily: 'Comic Sans MS'
           }).setOrigin(0.5);
@@ -77,6 +93,37 @@ import Phaser from 'phaser';
         // Start first problem
         this.generateProblem();
         console.log('Create finished');
+
+        // Start timer
+        this.startTimer();
+      }
+
+      startTimer() {
+        this.timer = 30;
+        this.timerText.setText(this.timer);
+        this.updateProgressBar();
+        this.time.addEvent({
+          delay: 1000,
+          callback: this.updateTimer,
+          callbackScope: this,
+          loop: true
+        });
+      }
+
+      updateTimer() {
+        this.timer--;
+        this.timerText.setText(this.timer);
+        this.updateProgressBar();
+        if (this.timer <= 0) {
+          this.time.removeAllEvents();
+          this.generateProblem();
+          this.startTimer();
+        }
+      }
+
+      updateProgressBar() {
+        const progress = this.timer / 30;
+        this.progressBar.width = this.progressWidth * progress;
       }
 
       createDifficultyButtons() {
@@ -86,14 +133,14 @@ import Phaser from 'phaser';
           { text: 'Hard', value: 'hard', color: 0xff0000 }
         ];
 
-        const buttonSize = 80;
-        const padding = 10;
-        const startX = 800 - (buttonSize + padding) * difficulties.length;
+        const buttonSize = 40;
+        const padding = 8;
+        const startX = this.cameras.main.width - (buttonSize + padding) * difficulties.length;
 
         difficulties.forEach((diff, index) => {
           const button = this.add.rectangle(
             startX + (buttonSize + padding) * index, 
-            40, 
+            35, 
             buttonSize, 
             buttonSize, 
             diff.color
@@ -104,10 +151,11 @@ import Phaser from 'phaser';
             .on('pointerdown', () => {
               this.difficulty = diff.value;
               this.generateProblem();
+              this.startTimer();
             });
           
           this.add.text(button.x, button.y, diff.text[0], {
-            fontSize: '24px',
+            fontSize: '14px',
             fill: '#fff',
             fontFamily: 'Comic Sans MS'
           }).setOrigin(0.5);
@@ -200,7 +248,10 @@ import Phaser from 'phaser';
           this.score += 10;
           this.scoreText.setText(`Score: ${this.score}`);
           this.createHeartAnimation();
-          this.time.delayedCall(1000, () => this.generateProblem());
+          this.time.delayedCall(1000, () => {
+            this.generateProblem();
+            this.startTimer();
+          });
         } else {
           this.score = Math.max(0, this.score - 5);
           this.scoreText.setText(`Score: ${this.score}`);
@@ -209,7 +260,7 @@ import Phaser from 'phaser';
       }
 
       createHeartAnimation() {
-        const heart = this.add.image(400, 300, 'heart')
+        const heart = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'heart')
           .setScale(0)
           .setAlpha(1);
         
@@ -224,7 +275,7 @@ import Phaser from 'phaser';
       }
 
       showSadFace() {
-        const sad = this.add.image(400, 300, 'sad')
+        const sad = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'sad')
           .setScale(0)
           .setAlpha(0);
         
@@ -245,11 +296,15 @@ import Phaser from 'phaser';
 
     const config = {
       type: Phaser.AUTO,
-      width: 800,
-      height: 600,
+      width: window.innerWidth,
+      height: window.innerHeight,
       parent: 'game-container',
       scene: [MainScene],
-      backgroundColor: '#ffffff'
+      backgroundColor: '#ffffff',
+      scale: {
+        mode: Phaser.Scale.RESIZE,
+        autoCenter: Phaser.Scale.CENTER_BOTH
+      }
     };
 
     const game = new Phaser.Game(config);

@@ -9,7 +9,8 @@ body {
     }
 
     #game-container {
-      width: 800px;
-      height: 600px;
+      width: 100%;
+      max-width: 600px; /* Added max-width */
+      height: 100%;
       box-shadow: 0 0 20px rgba(0,0,0,0.1);
     }
