@@ -18,8 +18,8 @@ import React, { useState, useEffect, useRef } from 'react';
           maxNumber = 10;
       }
 
-      const num1 = Math.floor(Math.random() * maxNumber) + 1;
-      const num2 = Math.floor(Math.random() * maxNumber) + 1;
+      let num1 = Math.floor(Math.random() * maxNumber) + 1;
+      let num2 = Math.floor(Math.random() * maxNumber) + 1;
       const availableOperations = [];
 
       if (operations.includes('addsub')) {
@@ -39,7 +39,15 @@ import React, { useState, useEffect, useRef } from 'react';
       } else if (operation === '*') {
         answer = num1 * num2;
       } else {
-          answer = Math.floor(Math.max(num1, num2) / Math.min(num1, num2))
+        if (num1 < num2) {
+          [num1, num2] = [num2, num1];
+        }
+        
+        const remainder = num1 % num2;
+        if (remainder !== 0) {
+          num1 = num1 - remainder;
+        }
+        answer = num1 / num2;
       }
 
       if (answer < 0) {
@@ -72,7 +80,6 @@ import React, { useState, useEffect, useRef } from 'react';
       const [timeLeft, setTimeLeft] = useState(30);
       const [showConfetti, setShowConfetti] = useState(false);
       const [shake, setShake] = useState(false);
-      const [showLevelOptions, setShowLevelOptions] = useState(false);
       const timerRef = useRef(null);
       const confettiContainer = document.getElementById('confetti-container');
 
@@ -126,7 +133,6 @@ import React, { useState, useEffect, useRef } from 'react';
 
       const handleLevelChange = (newLevel) => {
         setLevel(newLevel);
-        setShowLevelOptions(true);
       };
 
       const handleOperationChange = (operation) => {
@@ -168,24 +174,20 @@ import React, { useState, useEffect, useRef } from 'react';
             >
               H
             </button>
-            {showLevelOptions && (
-              <div className="level-options-container">
-                <div
-                  className="level-option"
-                  onClick={() => handleOperationChange('addsub')}
-                  style={{ backgroundColor: operations.includes('addsub') ? '#e0e0e0' : 'transparent' }}
-                >
-                  + -
-                </div>
-                <div
-                  className="level-option"
-                  onClick={() => handleOperationChange('muldiv')}
-                  style={{ backgroundColor: operations.includes('muldiv') ? '#e0e0e0' : 'transparent' }}
-                >
-                  * /
-                </div>
-              </div>
-            )}
+          </div>
+          <div className="operation-select-container">
+            <div
+              className={`operation-button ${operations.includes('addsub') ? 'active' : ''}`}
+              onClick={() => handleOperationChange('addsub')}
+            >
+              + -
+            </div>
+            <div
+              className={`operation-button ${operations.includes('muldiv') ? 'active' : ''}`}
+              onClick={() => handleOperationChange('muldiv')}
+            >
+              * /
+            </div>
           </div>
           <div className="question">
             {question.num1} {question.operation} {question.num2} = ?
