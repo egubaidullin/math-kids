@@ -35,7 +35,10 @@ import React, { useState, useEffect, useRef } from 'react';
       if (operation === '+') {
         answer = num1 + num2;
       } else if (operation === '-') {
-        answer = Math.max(num1, num2) - Math.min(num1, num2);
+        if (num1 < num2) {
+          [num1, num2] = [num2, num1];
+        }
+        answer = num1 - num2;
       } else if (operation === '*') {
         answer = num1 * num2;
       } else {
