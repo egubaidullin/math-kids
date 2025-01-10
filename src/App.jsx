@@ -56,7 +56,11 @@ import React, { useState, useEffect, useRef } from 'react';
 
       const options = [answer];
       while (options.length < 3) {
-        const randomOption = Math.floor(Math.random() * (maxNumber * 2)) + 1;
+        let randomOption = Math.floor(Math.random() * (maxNumber * 2)) + 1;
+        if (randomOption === answer) continue;
+        if (randomOption < 0) {
+          randomOption = Math.abs(randomOption)
+        }
         if (!options.includes(randomOption)) {
           options.push(randomOption);
         }
@@ -80,6 +84,7 @@ import React, { useState, useEffect, useRef } from 'react';
       const [timeLeft, setTimeLeft] = useState(30);
       const [showConfetti, setShowConfetti] = useState(false);
       const [shake, setShake] = useState(false);
+      const [animationsEnabled, setAnimationsEnabled] = useState(true);
       const timerRef = useRef(null);
       const confettiContainer = document.getElementById('confetti-container');
 
@@ -110,18 +115,22 @@ import React, { useState, useEffect, useRef } from 'react';
 
         if (option === question.answer) {
           setScore((prevScore) => prevScore + 10);
-          setShowConfetti(true);
-          ReactDOM.createRoot(confettiContainer).render(
-            <Confetti width={window.innerWidth} height={window.innerHeight} />
-          );
-          setTimeout(() => {
-            setShowConfetti(false);
-            ReactDOM.createRoot(confettiContainer).render(<></>);
-          }, 3000);
+          if (animationsEnabled) {
+            setShowConfetti(true);
+            ReactDOM.createRoot(confettiContainer).render(
+              <Confetti width={window.innerWidth} height={window.innerHeight} />
+            );
+            setTimeout(() => {
+              setShowConfetti(false);
+              ReactDOM.createRoot(confettiContainer).render(<></>);
+            }, 3000);
+          }
         } else {
           setScore((prevScore) => Math.max(0, prevScore - 5));
-          setShake(true);
-          setTimeout(() => setShake(false), 300);
+          if (animationsEnabled) {
+            setShake(true);
+            setTimeout(() => setShake(false), 300);
+          }
         }
 
         setTimeout(() => {
@@ -149,12 +158,21 @@ import React, { useState, useEffect, useRef } from 'react';
         setOperations(newOperations);
       };
 
+      const toggleAnimations = () => {
+        setAnimationsEnabled(!animationsEnabled);
+      };
+
       const progressBarStyle = {
         width: `${(timeLeft / 30) * 100}%`,
       };
 
       return (
-        <div className={`game-container ${shake ? 'shake' : ''}`}>
+        <div className={`game-container ${shake && animationsEnabled ? 'shake' : ''}`}>
+          <div className="animation-toggle-container">
+            <button className="animation-toggle-button" onClick={toggleAnimations}>
+              {animationsEnabled ? '✨' : '🚫'}
+            </button>
+          </div>
           <div className="level-select-container">
             <button
               className={`level-button easy ${level === 'easy' ? 'active' : ''}`}
