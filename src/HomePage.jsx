@@ -12,7 +12,9 @@ function HomePage() {
         <li>
           <Link to="/magic-square">Magic Square</Link>
         </li>
-        {/* Add more games here as you develop them */}
+        <li>
+          <Link to="/number-trailblazers">Number Trailblazers</Link>
+        </li>
       </ul>
     </div>
   );
