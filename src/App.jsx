@@ -5,6 +5,7 @@ import MathGame from './MathGame';
 import MagicSquare from './MagicSquare';
 import NumberTrailblazers from './NumberTrailblazers';
 import PatternPathfinder from './PatternPathfinder';
+import FifteenPuzzle from './FifteenPuzzle';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/magic-square" element={<MagicSquare />} />
         <Route path="/number-trailblazers" element={<NumberTrailblazers />} />
         <Route path="/pattern-pathfinder" element={<PatternPathfinder />} />
+        <Route path="/fifteen-puzzle" element={<FifteenPuzzle />} />
       </Routes>
     </Router>
   );

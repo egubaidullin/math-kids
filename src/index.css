@@ -57,8 +57,8 @@ body {
 .top-controls {
   position: absolute;
   top: 10px;
-  left: 0; /* Changed to 0 */
-  width: 100%; /* Changed to 100% */
+  left: 0;
+  width: 100%;
   background-color: rgba(240, 240, 240, 0.8);
   padding: 5px 10px;
   display: flex;
@@ -342,4 +342,42 @@ body {
   0%, 100% { transform: translateX(0); }
   10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
   20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+/* Fifteen Puzzle Styles */
+.puzzle-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 10px;
+  width: 300px;
+  margin-bottom: 20px;
+}
+
+.puzzle-tile {
+  width: 70px;
+  height: 70px;
+  font-size: 24px;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  cursor: pointer;
+  background-color: #f9f9f9;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.puzzle-tile:hover {
+  background-color: #e0e0e0;
+  transform: scale(1.05);
+}
+
+.puzzle-tile.empty {
+  background-color: #fff;
+  border: 2px dashed #ccc;
+  box-shadow: none;
+  cursor: default;
+}
+
+.moves-count {
+  font-size: 18px;
+  color: #555;
 }
