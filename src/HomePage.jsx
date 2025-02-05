@@ -15,6 +15,9 @@ function HomePage() {
         <li>
           <Link to="/number-trailblazers">Number Trailblazers</Link>
         </li>
+        <li>
+          <Link to="/pattern-pathfinder">Pattern Pathfinder</Link>
+        </li>
       </ul>
     </div>
   );
