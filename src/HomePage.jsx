@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import './HomePage.css';
 
 function HomePage() {
   return (
@@ -20,6 +21,9 @@ function HomePage() {
         </li>
         <li>
           <Link to="/fifteen-puzzle">Fifteen Puzzle</Link>
+        </li>
+        <li>
+          <Link to="/shulte-tables">Shulte Tables</Link>
         </li>
       </ul>
     </div>
