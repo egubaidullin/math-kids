@@ -168,34 +168,34 @@ function MathGame() {
     <div className={`game-container ${shake && animationsEnabled ? 'shake' : ''}`}>
       <div className="top-controls">
         <Link to="/" className="home-icon">
-          <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f3e0.png" alt="Home" style={{width: '32px', height: '32px'}}/>
+          <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f3e0.png" alt="Home" style={{ width: '32px', height: '32px' }} />
         </Link>
         <div className="animation-toggle-container">
           <button className="animation-toggle-button" onClick={toggleAnimations}>
             {animationsEnabled ? '✨' : '🚫'}
           </button>
         </div>
-      </div>
-      
-      <div className="level-select-container">
-        <button
-          className={`level-button easy ${level === 'easy' ? 'active' : ''}`}
-          onClick={() => handleLevelChange('easy')}
-        >
-          E
-        </button>
-        <button
-          className={`level-button medium ${level === 'medium' ? 'active' : ''}`}
-          onClick={() => handleLevelChange('medium')}
-        >
-          M
-        </button>
-        <button
-          className={`level-button hard ${level === 'hard' ? 'active' : ''}`}
-          onClick={() => handleLevelChange('hard')}
-        >
-          H
-        </button>
+        <h2>Math Game</h2>
+        <div className="level-select-container">
+          <button
+            className={`level-button easy ${level === 'easy' ? 'active' : ''}`}
+            onClick={() => handleLevelChange('easy')}
+          >
+            E
+          </button>
+          <button
+            className={`level-button medium ${level === 'medium' ? 'active' : ''}`}
+            onClick={() => handleLevelChange('medium')}
+          >
+            M
+          </button>
+          <button
+            className={`level-button hard ${level === 'hard' ? 'active' : ''}`}
+            onClick={() => handleLevelChange('hard')}
+          >
+            H
+          </button>
+        </div>
       </div>
 
       <div className="operation-select-container">

@@ -149,62 +149,61 @@ function MagicSquare() {
       if (animationsEnabled) {
         setShake(true);
         setTimeout(() => setShake(false), 300);
-        }
-        return;
       }
+      return;
+    }
 
-      setIsComplete(true);
-      setHasWon(true);
-      if (animationsEnabled) {
-        setShowConfetti(true);
-        ReactDOM.createRoot(confettiContainer).render(
-          <Confetti width={window.innerWidth} height={window.innerHeight} />
-        );
-        setTimeout(() => {
-          setShowConfetti(false);
-          ReactDOM.createRoot(confettiContainer).render(<></>);
-          generateMagicSquare(difficulty); // Generate new square after win
-        }, 3000);
-      } else {
-        generateMagicSquare(difficulty); // Generate new square after win
-      }
-    };
-
-    const toggleAnimations = () => {
-      setAnimationsEnabled(!animationsEnabled);
-      setShake(false);
-      setShowConfetti(false);
-    };
-
-    const numberPanel = () => {
-      const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-      return (
-        <div className="number-panel">
-          {numbers.map((number) => (
-            <button
-              key={number}
-              className="number-button"
-              onClick={() => handleNumberSelect(number)}
-            >
-              {number}
-            </button>
-          ))}
-        </div>
+    setIsComplete(true);
+    setHasWon(true);
+    if (animationsEnabled) {
+      setShowConfetti(true);
+      ReactDOM.createRoot(confettiContainer).render(
+        <Confetti width={window.innerWidth} height={window.innerHeight} />
       );
-    };
+      setTimeout(() => {
+        setShowConfetti(false);
+        ReactDOM.createRoot(confettiContainer).render(<></>);
+        generateMagicSquare(difficulty); // Generate new square after win
+      }, 3000);
+    } else {
+      generateMagicSquare(difficulty); // Generate new square after win
+    }
+  };
 
+  const toggleAnimations = () => {
+    setAnimationsEnabled(!animationsEnabled);
+    setShake(false);
+    setShowConfetti(false);
+  };
+
+  const numberPanel = () => {
+    const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
     return (
-      <div className={`game-container ${shake && animationsEnabled ? 'shake' : ''}`}>
-        {showConfetti && <Confetti width={window.innerWidth} height={window.innerHeight} />}
-        <div className="top-controls">
-          <Link to="/" className="home-icon">
-            <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f3e0.png" alt="Home" style={{ width: '32px', height: '32px' }} />
-          </Link>
-          <div className="animation-toggle-container">
-            <button className="animation-toggle-button" onClick={toggleAnimations}>
-              {animationsEnabled ? '✨' : '🚫'}
-            </button>
+      <div className="options-container">
+        {numbers.map((number) => (
+          <div
+            key={number}
+            className={`option`}
+            onClick={() => handleNumberSelect(number)}
+          >
+            {number}
           </div>
+        ))}
+      </div>
+    );
+  };
+
+  return (
+    <div className={`game-container ${shake && animationsEnabled ? 'shake' : ''}`}>
+      {showConfetti && <Confetti width={window.innerWidth} height={window.innerHeight} />}
+      <div className="top-controls">
+        <Link to="/" className="home-icon">
+          <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f3e0.png" alt="Home" style={{ width: '32px', height: '32px' }} />
+        </Link>
+        <div className="animation-toggle-container">
+          <button className="animation-toggle-button" onClick={toggleAnimations}>
+            {animationsEnabled ? '✨' : '🚫'}
+          </button>
         </div>
         <h2>Magic Square Game</h2>
         <div className="level-select-container">
@@ -227,40 +226,41 @@ function MagicSquare() {
             H
           </button>
         </div>
-        <div className="magic-square">
-          {square.map((row, rowIndex) => (
-            <div key={rowIndex} className="magic-square-row">
-              {row.map((cell, colIndex) => (
-                <div
-                  key={colIndex}
-                  className={`magic-square-cell ${
-                    selectedCell && selectedCell.row === rowIndex && selectedCell.col === colIndex
-                      ? 'selected'
-                      : ''
-                  } ${cell === null ? 'missing' : ''}`}
-                  onClick={() => handleCellClick(rowIndex, colIndex)}
-                >
-                  {cell === null ? (
-                    userInput[rowIndex][colIndex] !== '' ? userInput[rowIndex][colIndex] : '?'
-                  ) : (
-                    cell
-                  )}
-                </div>
-              ))}
-            </div>
-          ))}
-        </div>
-        {selectedCell && numberPanel()}
-        <button className="check-button" onClick={checkMagicSquare}>
-          <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/2705.png" alt="Check" style={{ width: '24px', height: '24px' }} />
-        </button>
-        {isComplete && hasWon !== null && (
-          <div className={`result-message ${hasWon ? 'win' : 'lose'}`}>
-            {hasWon ? 'Congratulations! You won!' : 'Sorry, try again!'}
-          </div>
-        )}
       </div>
-    );
-  }
+      <div className="magic-square">
+        {square.map((row, rowIndex) => (
+          <div key={rowIndex} className="magic-square-row">
+            {row.map((cell, colIndex) => (
+              <div
+                key={colIndex}
+                className={`magic-square-cell ${
+                  selectedCell && selectedCell.row === rowIndex && selectedCell.col === colIndex
+                    ? 'selected'
+                    : ''
+                } ${cell === null ? 'missing' : ''}`}
+                onClick={() => handleCellClick(rowIndex, colIndex)}
+              >
+                {cell === null ? (
+                  userInput[rowIndex][colIndex] !== '' ? userInput[rowIndex][colIndex] : '?'
+                ) : (
+                  cell
+                )}
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+      {selectedCell && numberPanel()}
+      <button className="check-button" onClick={checkMagicSquare}>
+        <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/2705.png" alt="Check" style={{ width: '24px', height: '24px' }} />
+      </button>
+      {isComplete && hasWon !== null && (
+        <div className={`result-message ${hasWon ? 'win' : 'lose'}`}>
+          {hasWon ? 'Congratulations! You won!' : 'Sorry, try again!'}
+        </div>
+      )}
+    </div>
+  );
+}
 
-  export default MagicSquare;
+export default MagicSquare;
