@@ -34,7 +34,32 @@ function ShulteTables() {
       }, 10);
     }
     return () => clearInterval(timer);
-  }, [isGameActive, startTime]);
+  }, [isGameActive, startTime, gridSize, options]);
+
+  useEffect(() => {
+    if (!isGameActive) {
+      generateInitialNumbers();
+    }
+  }, [gridSize, options, isGameActive]);
+
+  const generateInitialNumbers = () => {
+    const total = gridSize * gridSize;
+    let nums = Array.from({ length: total }, (_, i) => i + 1);
+    
+    if (options.inverseCount) {
+      nums.reverse();
+    }
+
+    if (options.shuffleNumbers) {
+      nums = shuffleArray([...nums]);
+    }
+
+    if (options.groups > 1) {
+      nums = generateGroupedNumbers(nums);
+    }
+
+    setNumbers(nums);
+  };
 
   const generateNumbers = () => {
     const total = gridSize * gridSize;
@@ -202,25 +227,27 @@ function ShulteTables() {
         </button>
       </div>
 
-      <div className="shulte-grid" style={{
-        gridTemplateColumns: `repeat(${gridSize}, 1fr)`,
-        gap: '8px',
-        padding: '20px'
-      }}>
-        {numbers.map((number, index) => (
-          <div
-            key={index}
-            data-index={index}
-            className={getCellClassName(number, index)}
-            style={getCellStyle(number)}
-            onClick={() => handleNumberClick(number, index)}
-            onMouseEnter={() => setHoveredCell(index)}
-            onMouseLeave={() => setHoveredCell(null)}
-          >
-            {number}
-          </div>
-        ))}
-      </div>
+      {isGameActive && (
+        <div className="shulte-grid" style={{
+          gridTemplateColumns: `repeat(${gridSize}, 1fr)`,
+          gap: '8px',
+          padding: '20px'
+        }}>
+          {numbers.map((number, index) => (
+            <div
+              key={index}
+              data-index={index}
+              className={getCellClassName(number, index)}
+              style={getCellStyle(number)}
+              onClick={() => handleNumberClick(number, index)}
+              onMouseEnter={() => setHoveredCell(index)}
+              onMouseLeave={() => setHoveredCell(null)}
+            >
+              {number}
+            </div>
+          ))}
+        </div>
+      )}
 
       <div className="timer">
         Time: {formatTime(elapsedTime)} sec
