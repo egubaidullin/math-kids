@@ -13,7 +13,7 @@
   margin: 25px 2px;
   border: 0;
   border-radius: 4px;
-  background: #87CEEB; /* Light Sky Blue */
+  background: #77B5FE; /* Slightly Darker Light Blue */
   font: bold 14px Arial;
   text-align: center;
   text-transform: uppercase;
@@ -22,7 +22,7 @@
 }
 
 #controls button:hover {
-  background: #ADD8E6; /* Light Blue */
+  background: #6495ED; /* Cornflower Blue */
 }
 
 #puzzle {
@@ -31,7 +31,7 @@
   height: 325px;
   margin: 0 auto;
   margin-top: 80px;
-  border: 8px solid #87CEEB; /* Light Sky Blue */
+  border: 8px solid #6495ED; /* Cornflower Blue */
   border-radius: 4px;
 }
 
@@ -56,11 +56,11 @@
 }
 
 #puzzle span.number.light {
-  background: #87CEEB; /* Light Sky Blue */
+  background: #77B5FE; /* Slightly Darker Light Blue */
 }
 
 #puzzle span.number.dark {
-  background: #87CEEB; /* Light Sky Blue */
+  background: #77B5FE; /* Slightly Darker Light Blue */
 }
 
 #puzzle.animate span {
