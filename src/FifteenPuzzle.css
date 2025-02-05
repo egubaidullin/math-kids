@@ -1,3 +1,4 @@
+<file path="src/FifteenPuzzle.css">
 ::selection {
   background: transparent;
 }
@@ -56,11 +57,11 @@
 }
 
 #puzzle span.number.light {
-  background: #77B5FE; /* Slightly Darker Light Blue */
+  background: #5DADE2; /* Slightly Darker Light Blue */
 }
 
 #puzzle span.number.dark {
-  background: #77B5FE; /* Slightly Darker Light Blue */
+  background: #5DADE2; /* Slightly Darker Light Blue */
 }
 
 #puzzle.animate span {
@@ -97,3 +98,4 @@
   background-color: #e0e0e0;
   transform: scale(1.05);
 }
+</file>
