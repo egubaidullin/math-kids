@@ -1,0 +1,37 @@
+.home-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: Arial, sans-serif;
+}
+
+.home-page h1 {
+  margin-bottom: 20px;
+}
+
+.home-page ul {
+  list-style: none;
+  padding: 0;
+}
+
+.home-page li {
+  margin-bottom: 10px;
+}
+
+.home-page a {
+  text-decoration: none;
+  font-size: 18px;
+  color: #007bff;
+}
+
+.game-link {
+  text-decoration: none;
+  font-size: 20px;
+  color: #007bff;
+  transition: transform 0.2s ease-in-out;
+  display: inline-block; /* Make it a block-level element for better control */
+}
+
+.game-link:hover {
+  transform: scale(1.1); /* Increase size on hover */
+}

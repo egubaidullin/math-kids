@@ -57,8 +57,8 @@ body {
 .top-controls {
   position: absolute;
   top: 10px;
-  left: 10px;
-  width: 95%;
+  left: 0; /* Changed to 0 */
+  width: 100%; /* Changed to 100% */
   background-color: rgba(240, 240, 240, 0.8);
   padding: 5px 10px;
   display: flex;
@@ -69,6 +69,7 @@ body {
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   background: linear-gradient(to bottom, #f8f8f8, #f0f0f0);
+  flex-wrap: wrap; /* Allow items to wrap */
 }
 
 .top-controls h2 {
@@ -152,11 +153,26 @@ body {
 .operation-select-container {
   display: flex;
   gap: 10px;
-  margin-top: 10px;
-  justify-content: flex-end;
-  position: absolute;
-  top: 60px;
-  right: 10px;
+  margin-top: 5px; /* Reduced margin */
+  justify-content: center;
+  width: 100%; /* Take full width */
+}
+
+.operation-button {
+  padding: 8px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+}
+
+.operation-button.active {
+  background-color: #e0e0e0;
 }
 
 /* Progress Bar (Math Game) */

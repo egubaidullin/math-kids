@@ -166,6 +166,7 @@ function MathGame() {
 
   return (
     <div className={`game-container ${shake && animationsEnabled ? 'shake' : ''}`}>
+      {showConfetti && <Confetti width={window.innerWidth} height={window.innerHeight} />}
       <div className="top-controls">
         <Link to="/" className="home-icon">
           <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f3e0.png" alt="Home" style={{ width: '32px', height: '32px' }} />
