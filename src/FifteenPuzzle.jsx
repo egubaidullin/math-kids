@@ -169,9 +169,9 @@ function FifteenPuzzle() {
         </Link>
         <h2>Fifteen Puzzle</h2>
       </div>
-      <div id="controls">
-        <button id="newGame" onClick={newGame}>New Game</button>
-        <button id="solve" onClick={solve}>Solve</button>
+      <div className="controls-container">
+        <button className="game-button" onClick={newGame}>New Game</button>
+        <button className="game-button" onClick={solve}>Solve</button>
       </div>
       <div id="puzzle" ref={puzzleRef} className={puzzleSolved ? 'solved' : ''}>
         {tiles.map((tileValue, index) => {

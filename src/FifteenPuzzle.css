@@ -13,7 +13,7 @@
   margin: 25px 2px;
   border: 0;
   border-radius: 4px;
-  background: #001F1F;
+  background: #87CEEB; /* Light Sky Blue */
   font: bold 14px Arial;
   text-align: center;
   text-transform: uppercase;
@@ -22,7 +22,7 @@
 }
 
 #controls button:hover {
-  background: #003333;
+  background: #ADD8E6; /* Light Blue */
 }
 
 #puzzle {
@@ -31,7 +31,7 @@
   height: 325px;
   margin: 0 auto;
   margin-top: 80px;
-  border: 8px solid #001F1F;
+  border: 8px solid #87CEEB; /* Light Sky Blue */
   border-radius: 4px;
 }
 
@@ -56,11 +56,11 @@
 }
 
 #puzzle span.number.light {
-  background: #226666;
+  background: #87CEEB; /* Light Sky Blue */
 }
 
 #puzzle span.number.dark {
-  background: #003333;
+  background: #87CEEB; /* Light Sky Blue */
 }
 
 #puzzle.animate span {
@@ -73,4 +73,27 @@
   color: green;
   text-align: center;
   margin-top: 20px;
+}
+
+.controls-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.game-button {
+  padding: 16px 32px;
+  font-size: 24px;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  cursor: pointer;
+  background-color: #f9f9f9;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 0 10px;
+}
+
+.game-button:hover {
+  background-color: #e0e0e0;
+  transform: scale(1.05);
 }
