@@ -1,3 +1,4 @@
+/* General Styles */
 html, body, #root {
   margin: 0;
   padding: 0;
@@ -52,11 +53,66 @@ body {
   20%, 40%, 60%, 80% { transform: translateX(5px); }
 }
 
+/* Top Controls */
+.top-controls {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 95%;
+  background-color: rgba(240, 240, 240, 0.8);
+  padding: 5px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 10;
+  box-sizing: border-box;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(to bottom, #f8f8f8, #f0f0f0);
+}
+
+.top-controls h2 {
+  margin: 0;
+  font-size: 20px;
+  color: #333;
+  flex-grow: 1;
+  text-align: center;
+}
+
+/* Animation Toggle */
+.animation-toggle-container {
+  margin-right: auto;
+  margin-left: 5px;
+}
+
+.animation-toggle-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+  padding: 5px;
+  opacity: 1;
+  color: #007bff;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  transition: opacity 0.3s ease;
+}
+
+.animation-toggle-button:hover {
+  opacity: 1;
+}
+
+/* Home Icon */
+.home-icon {
+  z-index: 10;
+  margin-right: 5px;
+}
+
+/* Level Select */
 .level-select-container {
   display: flex;
   gap: 5px;
   z-index: 10;
-  width: auto; /* Take full width */
+  width: auto;
 }
 
 .level-button {
@@ -92,6 +148,7 @@ body {
   box-shadow: 0 0 0 2px white, 0 0 0 4px #4caf50;
 }
 
+/* Operation Select (Math Game) */
 .operation-select-container {
   display: flex;
   gap: 10px;
@@ -119,6 +176,7 @@ body {
   background-color: #e0e0e0;
 }
 
+/* Progress Bar (Math Game) */
 .progress-bar-container {
   width: 80%;
   height: 12px;
@@ -136,6 +194,7 @@ body {
   transition: width 0.3s ease;
 }
 
+/* Question/Options (Math Game) */
 .question {
   font-size: 32px;
   margin-bottom: 30px;
@@ -178,12 +237,14 @@ body {
   border-color: #f44336;
 }
 
+/* Score (Math Game) */
 .score {
   font-size: 24px;
   margin-bottom: 15px;
   color: #555;
 }
 
+/* Confetti */
 #confetti-container {
   position: fixed;
   top: 0;
@@ -194,100 +255,7 @@ body {
   z-index: 1000;
 }
 
-.top-controls {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  width: 95%;
-  background-color: rgba(240, 240, 240, 0.8);
-  padding: 5px 10px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  z-index: 10;
-  box-sizing: border-box;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  background: linear-gradient(to bottom, #f8f8f8, #f0f0f0);
-}
-
-.top-controls h2 {
-  margin: 0;
-  font-size: 20px;
-  color: #333;
-}
-
-.animation-toggle-container {
-  margin-left: 10px;
-}
-
-.animation-toggle-button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 24px;
-  padding: 5px;
-  opacity: 1;
-  color: #007bff;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-  transition: opacity 0.3s ease;
-}
-
-.animation-toggle-button:hover {
-  opacity: 1;
-}
-
-.home-icon {
-  z-index: 10;
-  margin-right: 5px;
-}
-
 /* Magic Square Styles */
-.magic-square-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-family: Arial, sans-serif;
-}
-
-.difficulty-buttons {
-  margin-bottom: 20px;
-}
-
-.difficulty-buttons button {
-  padding: 10px 20px;
-  margin: 0 10px;
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-  font-size: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  transition: background-color 0.3s ease;
-}
-
-.difficulty-buttons button.easy {
-  background-color: #66bb6a;
-  color: white;
-}
-
-.difficulty-buttons button.medium {
-  background-color: #ffa726;
-  color: white;
-}
-
-.difficulty-buttons button.hard {
-  background-color: #ef5350;
-  color: white;
-}
-
-.difficulty-buttons button.active {
-  box-shadow: 0 0 0 2px white, 0 0 0 4px #4caf50;
-}
-
 .magic-square {
   display: flex;
   flex-direction: column;
@@ -300,13 +268,13 @@ body {
 }
 
 .magic-square-cell {
-  width: 60px; /* Increased size */
-  height: 60px; /* Increased size */
+  width: 60px;
+  height: 60px;
   border: 1px solid #ccc;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 24px; /* Increased font size */
+  font-size: 24px;
   cursor: pointer;
 }
 
@@ -315,55 +283,7 @@ body {
 }
 
 .magic-square-cell.missing {
-  background-color: #b0e2ff; /* More prominent highlight */
-}
-
-.magic-sum {
-  margin-top: 20px;
-  font-size: 18px;
-}
-
-.check-button {
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  background-color: #007bff;
-  color: white;
-  font-size: 16px;
-}
-
-.result-message {
-  margin-top: 20px;
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.result-message.win {
-  color: green;
-}
-
-.result-message.lose {
-  color: red;
-}
-
-.number-panel {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-  margin-bottom: 40px;
-}
-
-.number-button {
-  padding: 16px 32px;
-  font-size: 24px;
-  border: 2px solid #ccc;
-  border-radius: 10px;
-  cursor: pointer;
-  background-color: #f9f9f9;
-  transition: background-color 0.3s ease, transform 0.1s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #b0e2ff;
 }
 
 /* Home Page Styles */
@@ -391,14 +311,4 @@ body {
   text-decoration: none;
   font-size: 18px;
   color: #007bff;
-}
-
-.magic-square-container.shake {
-  animation: shake 0.3s ease-in-out;
-}
-
-@keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
-  20%, 40%, 60%, 80% { transform: translateX(5px); }
 }
