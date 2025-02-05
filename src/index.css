@@ -245,6 +245,7 @@ body {
   border: none;
   border-radius: 50%;
   cursor: pointer;
+  background-color: #f0f0f0;
   font-size: 16px;
   display: flex;
   align-items: center;
@@ -285,13 +286,13 @@ body {
 }
 
 .magic-square-cell {
-  width: 50px;
-  height: 50px;
+  width: 60px; /* Increased size */
+  height: 60px; /* Increased size */
   border: 1px solid #ccc;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 20px;
+  font-size: 24px; /* Increased font size */
   cursor: pointer;
 }
 
@@ -345,7 +346,7 @@ body {
   border-radius: 5px;
   cursor: pointer;
   background-color: #f0f0f0;
-  font-size: 16px;
+  font-size: 18px; /* Increased font size */
 }
 
 /* Home Page Styles */
